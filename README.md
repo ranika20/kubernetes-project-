@@ -163,6 +163,6 @@ Every request is logged with its method, URL, status code and duration:
 
 ## Kubernetes and Argo CD
 
-The deployment files are in `k8s/`, and the Argo CD application is in `argo/taskflow-application.yaml`. The container image is built from the Node.js backend and static frontend in the Dockerfile. For a remote cluster, publish the image to a registry and update `k8s/kustomization.yaml` to use that image. For local k3s, import the image into containerd and keep `imagePullPolicy: Never`.
+All Kubernetes resources are in `k8s/taskflow.yaml`; the Argo CD application is in `argo/taskflow-application.yaml`. The image is built from the Node.js backend and static frontend in the Dockerfile. For local k3s, import `localhost/taskflow:local` into containerd before syncing.
 
-The app name can be changed through Git by editing `APP_NAME` in `k8s/configmap.yaml`. The replica count can be changed in `k8s/deployment.yaml`. Argo CD will keep both settings synchronized with Git.
+Change the app name in the ConfigMap or replica count in the Deployment inside `k8s/taskflow.yaml`. Argo CD keeps changes synchronized with Git.
